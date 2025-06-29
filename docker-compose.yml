@@ -57,6 +57,17 @@ services:
     networks:
       - todo-network
 
+  # Cloudflare Tunnel
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: todo-cloudflared
+    restart: always
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - todo-network
+
 volumes:
   postgres_data:
 
